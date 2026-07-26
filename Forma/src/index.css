@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--font-sans);
+  color: #0f172a;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, #99f6e4 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, #bae6fd 0%, transparent 50%),
+    linear-gradient(165deg, #f8fafc 0%, #e2e8f0 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}

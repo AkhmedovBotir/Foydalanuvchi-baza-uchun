@@ -1,0 +1,1365 @@
+basePath: /api/v1
+definitions:
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.CreateAdminRequest:
+    properties:
+      name:
+        example: Alisher Karimov
+        maxLength: 150
+        minLength: 2
+        type: string
+      password:
+        example: secret123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901234567"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: admin
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - password
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse:
+    properties:
+      error:
+        example: validation failed
+        type: string
+      message:
+        example: Xatolik yuz berdi
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.LoginRequest:
+    properties:
+      password:
+        example: secret123
+        type: string
+      username:
+        example: admin
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse:
+    properties:
+      data: {}
+      message:
+        example: Muvaffaqiyatli
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateAdminRequest:
+    properties:
+      name:
+        example: Alisher Karimov
+        maxLength: 150
+        minLength: 2
+        type: string
+      password:
+        example: newsecret123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901234567"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: admin
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateProfileRequest:
+    properties:
+      name:
+        example: Alisher Karimov
+        maxLength: 150
+        minLength: 2
+        type: string
+      password:
+        example: newsecret123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901234567"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: admin
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.CreateCompanyRequest:
+    properties:
+      name:
+        example: Tech Solutions LLC
+        maxLength: 200
+        minLength: 2
+        type: string
+      password:
+        example: company123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901112233"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: techsol
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - password
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse:
+    properties:
+      error:
+        example: validation failed
+        type: string
+      message:
+        example: Xatolik yuz berdi
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.LoginRequest:
+    properties:
+      password:
+        example: company123
+        type: string
+      username:
+        example: techsol
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse:
+    properties:
+      data: {}
+      message:
+        example: Muvaffaqiyatli
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateCompanyRequest:
+    properties:
+      name:
+        example: Tech Solutions LLC
+        maxLength: 200
+        minLength: 2
+        type: string
+      password:
+        example: newcompany123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901112233"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: techsol
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateProfileRequest:
+    properties:
+      name:
+        example: Tech Solutions LLC
+        maxLength: 200
+        minLength: 2
+        type: string
+      password:
+        example: newcompany123
+        maxLength: 100
+        minLength: 6
+        type: string
+      phone:
+        example: "+998901112233"
+        maxLength: 30
+        minLength: 9
+        type: string
+      username:
+        example: techsol
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - name
+    - phone
+    - username
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse:
+    properties:
+      error:
+        example: validation failed
+        type: string
+      message:
+        example: Xatolik yuz berdi
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse:
+    properties:
+      data: {}
+      message:
+        example: Muvaffaqiyatli
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.UpdateSurveyLinkBaseRequest:
+    properties:
+      base_url:
+        example: http://localhost:3000/s
+        maxLength: 500
+        minLength: 8
+        type: string
+    required:
+    - base_url
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.CreateSurveyRequest:
+    properties:
+      description:
+        maxLength: 10000
+        type: string
+      questions:
+        items:
+          type: integer
+        type: array
+      settings:
+        items:
+          type: integer
+        type: array
+      slug:
+        maxLength: 100
+        type: string
+      sortOrder:
+        type: integer
+      title:
+        maxLength: 255
+        type: string
+    required:
+    - questions
+    - slug
+    - title
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse:
+    properties:
+      error:
+        example: validation failed
+        type: string
+      message:
+        example: Xatolik yuz berdi
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.FormSubmitRequest:
+    properties:
+      answers:
+        items:
+          type: integer
+        type: array
+      name:
+        example: Alisher Karimov
+        maxLength: 200
+        minLength: 2
+        type: string
+      phone:
+        example: "+998901234567"
+        maxLength: 30
+        minLength: 9
+        type: string
+    required:
+    - answers
+    - name
+    - phone
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse:
+    properties:
+      data: {}
+      message:
+        example: Muvaffaqiyatli
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.UpdateSurveyRequest:
+    properties:
+      description:
+        maxLength: 10000
+        type: string
+      questions:
+        items:
+          type: integer
+        type: array
+      settings:
+        items:
+          type: integer
+        type: array
+      slug:
+        maxLength: 100
+        type: string
+      sortOrder:
+        type: integer
+      title:
+        maxLength: 255
+        type: string
+    required:
+    - questions
+    - slug
+    - title
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+  description: Modular monolit backend. Admin, Company, Survey va Settings modullari.
+  license:
+    name: MIT
+  termsOfService: http://swagger.io/terms/
+  title: Foydalanuvchilar bazasi API
+  version: "1.0"
+paths:
+  /admins:
+    get:
+      description: Barcha adminlarni qaytaradi
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Adminlar ro'yxati
+      tags:
+      - Admins
+    post:
+      consumes:
+      - application/json
+      description: 'Admin CRUD: yangi admin qo''shadi'
+      parameters:
+      - description: Admin ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.CreateAdminRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Yangi admin yaratish
+      tags:
+      - Admins
+  /admins/{id}:
+    delete:
+      description: Adminni tizimdan o'chiradi
+      parameters:
+      - description: Admin UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Adminni o'chirish
+      tags:
+      - Admins
+    get:
+      description: Bitta admin ma'lumotlarini qaytaradi
+      parameters:
+      - description: Admin UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Adminni ID bo'yicha olish
+      tags:
+      - Admins
+    put:
+      consumes:
+      - application/json
+      description: Admin ma'lumotlarini o'zgartiradi. Password bo'sh qoldirilsa, eski
+        parol saqlanadi.
+      parameters:
+      - description: Admin UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Yangilangan ma'lumotlar
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateAdminRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Adminni yangilash
+      tags:
+      - Admins
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Username va password orqali tizimga kirish. JWT token qaytaradi.
+      parameters:
+      - description: Login ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      summary: Admin login
+      tags:
+      - Auth
+  /auth/profile:
+    get:
+      description: Token egasining profil ma'lumotlarini qaytaradi
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Joriy admin profili
+      tags:
+      - Auth
+    put:
+      consumes:
+      - application/json
+      description: Token egasi o'z profilini o'zgartiradi. Password bo'sh qoldirilsa,
+        eski parol saqlanadi.
+      parameters:
+      - description: Profil ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Joriy admin profilini yangilash
+      tags:
+      - Auth
+  /companies:
+    get:
+      description: Barcha kompaniyalarni qaytaradi (admin)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Kompaniyalar ro'yxati
+      tags:
+      - Companies
+    post:
+      consumes:
+      - application/json
+      description: Admin tomonidan yangi kompaniya qo'shiladi
+      parameters:
+      - description: Kompaniya ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.CreateCompanyRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Yangi kompaniya yaratish
+      tags:
+      - Companies
+  /companies/{id}:
+    delete:
+      description: Kompaniyani tizimdan o'chiradi (admin)
+      parameters:
+      - description: Company UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Kompaniyani o'chirish
+      tags:
+      - Companies
+    get:
+      description: Bitta kompaniya ma'lumotlarini qaytaradi (admin)
+      parameters:
+      - description: Company UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Kompaniyani ID bo'yicha olish
+      tags:
+      - Companies
+    put:
+      consumes:
+      - application/json
+      description: Kompaniya ma'lumotlarini o'zgartiradi. Password bo'sh qoldirilsa,
+        eski parol saqlanadi.
+      parameters:
+      - description: Company UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Yangilangan ma'lumotlar
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateCompanyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Kompaniyani yangilash
+      tags:
+      - Companies
+  /company/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Username va password orqali kompaniya tizimga kiradi. JWT token
+        qaytaradi.
+      parameters:
+      - description: Login ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      summary: Kompaniya login
+      tags:
+      - Company Auth
+  /company/auth/profile:
+    get:
+      description: Token egasi kompaniyaning profil ma'lumotlarini qaytaradi
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Joriy kompaniya profili
+      tags:
+      - Company Auth
+    put:
+      consumes:
+      - application/json
+      description: Token egasi o'z profilini o'zgartiradi. Password bo'sh qoldirilsa,
+        eski parol saqlanadi.
+      parameters:
+      - description: Profil ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateProfileRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Joriy kompaniya profilini yangilash
+      tags:
+      - Company Auth
+  /company/surveys/{id}/responses:
+    get:
+      description: Berilgan so'rovnoma (slug yoki id) javoblari
+      parameters:
+      - description: Survey slug yoki UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      - default: 1
+        description: Sahifa
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Bitta so'rovnoma javoblari
+      tags:
+      - Survey Responses
+  /company/surveys/{id}/responses/summary:
+    get:
+      parameters:
+      - description: Survey slug yoki UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnoma javoblari statistikasi
+      tags:
+      - Survey Responses
+  /company/surveys/responses:
+    get:
+      description: Kompaniyaning barcha so'rovnomalariga kelgan javoblar (name, phone
+        bilan)
+      parameters:
+      - default: 1
+        description: Sahifa
+        in: query
+        name: page
+        type: integer
+      - default: 20
+        description: Limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Barcha so'rovnoma javoblari
+      tags:
+      - Survey Responses
+  /company/surveys/responses/{responseId}:
+    delete:
+      parameters:
+      - description: Response UUID
+        in: path
+        name: responseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Javobni o'chirish
+      tags:
+      - Survey Responses
+    get:
+      parameters:
+      - description: Response UUID
+        in: path
+        name: responseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Bitta javobni olish
+      tags:
+      - Survey Responses
+  /forms/{slug}:
+    get:
+      description: Public form frontend uchun. Auth kerak emas. published yoki closed.
+      parameters:
+      - description: Survey slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      summary: Forma — so'rovnomani olish (tokensiz)
+      tags:
+      - Form
+    post:
+      consumes:
+      - application/json
+      description: name (ism) va phone (telefon) majburiy. Auth kerak emas. Faqat
+        published.
+      parameters:
+      - description: Survey slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      - description: Ism, telefon va javoblar
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.FormSubmitRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      summary: Forma — so'rovnomani topshirish (tokensiz)
+      tags:
+      - Form
+  /settings/survey-link-base:
+    get:
+      description: So'rovnomalar uchun public linkning asosiy (base) URL manzilini
+        qaytaradi
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnoma link base URL olish
+      tags:
+      - Settings
+    put:
+      consumes:
+      - application/json
+      description: Admin so'rovnoma public linklarining asosiy URL manzilini o'zgartiradi.
+        Mavjud so'rovnomalar linklari yangi base bo'yicha avtomatik hisoblanadi.
+      parameters:
+      - description: Base URL
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.UpdateSurveyLinkBaseRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnoma link base URL yangilash
+      tags:
+      - Settings
+  /surveys:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+      summary: Published surveys
+      tags:
+      - Surveys
+    post:
+      consumes:
+      - application/json
+      description: Kompaniya yangi so'rovnoma yaratadi. Slug va public link avtomatik
+        hosil bo'ladi.
+      parameters:
+      - description: So'rovnoma ma'lumotlari
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.CreateSurveyRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Yangi so'rovnoma yaratish
+      tags:
+      - Surveys
+  /surveys/{id}:
+    delete:
+      description: So'rovnomani tizimdan o'chiradi
+      parameters:
+      - description: Survey UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnomani o'chirish
+      tags:
+      - Surveys
+    get:
+      description: Bitta so'rovnoma ma'lumotlari va public linkini qaytaradi
+      parameters:
+      - description: Survey UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnomani ID bo'yicha olish
+      tags:
+      - Surveys
+    put:
+      consumes:
+      - application/json
+      description: Title, description, is_active yangilanadi. Slug va link o'zgarmaydi.
+      parameters:
+      - description: Survey UUID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Yangilangan ma'lumotlar
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.UpdateSurveyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: So'rovnomani yangilash
+      tags:
+      - Surveys
+securityDefinitions:
+  BearerAuth:
+    description: 'JWT token. Format: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

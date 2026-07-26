@@ -1,0 +1,2035 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Modular monolit backend. Admin, Company, Survey va Settings modullari.",
+        "title": "Foydalanuvchilar bazasi API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "support@example.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/admins": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Barcha adminlarni qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Adminlar ro'yxati",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Admin CRUD: yangi admin qo'shadi",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Yangi admin yaratish",
+                "parameters": [
+                    {
+                        "description": "Admin ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.CreateAdminRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admins/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Bitta admin ma'lumotlarini qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Adminni ID bo'yicha olish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Admin UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Admin ma'lumotlarini o'zgartiradi. Password bo'sh qoldirilsa, eski parol saqlanadi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Adminni yangilash",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Admin UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Yangilangan ma'lumotlar",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateAdminRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Adminni tizimdan o'chiradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Adminni o'chirish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Admin UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "description": "Username va password orqali tizimga kirish. JWT token qaytaradi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Admin login",
+                "parameters": [
+                    {
+                        "description": "Login ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/profile": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Token egasining profil ma'lumotlarini qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Joriy admin profili",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Token egasi o'z profilini o'zgartiradi. Password bo'sh qoldirilsa, eski parol saqlanadi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Joriy admin profilini yangilash",
+                "parameters": [
+                    {
+                        "description": "Profil ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateProfileRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/companies": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Barcha kompaniyalarni qaytaradi (admin)",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Kompaniyalar ro'yxati",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Admin tomonidan yangi kompaniya qo'shiladi",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Yangi kompaniya yaratish",
+                "parameters": [
+                    {
+                        "description": "Kompaniya ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.CreateCompanyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/companies/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Bitta kompaniya ma'lumotlarini qaytaradi (admin)",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Kompaniyani ID bo'yicha olish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Company UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Kompaniya ma'lumotlarini o'zgartiradi. Password bo'sh qoldirilsa, eski parol saqlanadi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Kompaniyani yangilash",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Company UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Yangilangan ma'lumotlar",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateCompanyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Kompaniyani tizimdan o'chiradi (admin)",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Kompaniyani o'chirish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Company UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/auth/login": {
+            "post": {
+                "description": "Username va password orqali kompaniya tizimga kiradi. JWT token qaytaradi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Company Auth"
+                ],
+                "summary": "Kompaniya login",
+                "parameters": [
+                    {
+                        "description": "Login ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/auth/profile": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Token egasi kompaniyaning profil ma'lumotlarini qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Company Auth"
+                ],
+                "summary": "Joriy kompaniya profili",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Token egasi o'z profilini o'zgartiradi. Password bo'sh qoldirilsa, eski parol saqlanadi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Company Auth"
+                ],
+                "summary": "Joriy kompaniya profilini yangilash",
+                "parameters": [
+                    {
+                        "description": "Profil ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateProfileRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/surveys/responses": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Kompaniyaning barcha so'rovnomalariga kelgan javoblar (name, phone bilan)",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey Responses"
+                ],
+                "summary": "Barcha so'rovnoma javoblari",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Sahifa",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/surveys/responses/{responseId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey Responses"
+                ],
+                "summary": "Bitta javobni olish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Response UUID",
+                        "name": "responseId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey Responses"
+                ],
+                "summary": "Javobni o'chirish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Response UUID",
+                        "name": "responseId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/surveys/{id}/responses": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Berilgan so'rovnoma (slug yoki id) javoblari",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey Responses"
+                ],
+                "summary": "Bitta so'rovnoma javoblari",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey slug yoki UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Sahifa",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/surveys/{id}/responses/summary": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Survey Responses"
+                ],
+                "summary": "So'rovnoma javoblari statistikasi",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey slug yoki UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/forms/{slug}": {
+            "get": {
+                "description": "Public form frontend uchun. Auth kerak emas. published yoki closed.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Form"
+                ],
+                "summary": "Forma — so'rovnomani olish (tokensiz)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey slug",
+                        "name": "slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "name (ism) va phone (telefon) majburiy. Auth kerak emas. Faqat published.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Form"
+                ],
+                "summary": "Forma — so'rovnomani topshirish (tokensiz)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey slug",
+                        "name": "slug",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Ism, telefon va javoblar",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.FormSubmitRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/settings/survey-link-base": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "So'rovnomalar uchun public linkning asosiy (base) URL manzilini qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "So'rovnoma link base URL olish",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Admin so'rovnoma public linklarining asosiy URL manzilini o'zgartiradi. Mavjud so'rovnomalar linklari yangi base bo'yicha avtomatik hisoblanadi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "So'rovnoma link base URL yangilash",
+                "parameters": [
+                    {
+                        "description": "Base URL",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.UpdateSurveyLinkBaseRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/surveys": {
+            "get": {
+                "tags": [
+                    "Surveys"
+                ],
+                "summary": "Published surveys",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Kompaniya yangi so'rovnoma yaratadi. Slug va public link avtomatik hosil bo'ladi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Surveys"
+                ],
+                "summary": "Yangi so'rovnoma yaratish",
+                "parameters": [
+                    {
+                        "description": "So'rovnoma ma'lumotlari",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.CreateSurveyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/surveys/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Bitta so'rovnoma ma'lumotlari va public linkini qaytaradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Surveys"
+                ],
+                "summary": "So'rovnomani ID bo'yicha olish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Title, description, is_active yangilanadi. Slug va link o'zgarmaydi.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Surveys"
+                ],
+                "summary": "So'rovnomani yangilash",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Yangilangan ma'lumotlar",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.UpdateSurveyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "So'rovnomani tizimdan o'chiradi",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Surveys"
+                ],
+                "summary": "So'rovnomani o'chirish",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Survey UUID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.CreateAdminRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "password",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 150,
+                    "minLength": 2,
+                    "example": "Alisher Karimov"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "secret123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901234567"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "admin"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "validation failed"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Xatolik yuz berdi"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.LoginRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "secret123"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "admin"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.MessageResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Muvaffaqiyatli"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateAdminRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 150,
+                    "minLength": 2,
+                    "example": "Alisher Karimov"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "newsecret123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901234567"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "admin"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_admin_dto.UpdateProfileRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 150,
+                    "minLength": 2,
+                    "example": "Alisher Karimov"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "newsecret123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901234567"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "admin"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.CreateCompanyRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "password",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 2,
+                    "example": "Tech Solutions LLC"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "company123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901112233"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "techsol"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "validation failed"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Xatolik yuz berdi"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.LoginRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "company123"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "techsol"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.MessageResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Muvaffaqiyatli"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateCompanyRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 2,
+                    "example": "Tech Solutions LLC"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "newcompany123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901112233"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "techsol"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_company_dto.UpdateProfileRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "phone",
+                "username"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 2,
+                    "example": "Tech Solutions LLC"
+                },
+                "password": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 6,
+                    "example": "newcompany123"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901112233"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3,
+                    "example": "techsol"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "validation failed"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Xatolik yuz berdi"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.MessageResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Muvaffaqiyatli"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_setting_dto.UpdateSurveyLinkBaseRequest": {
+            "type": "object",
+            "required": [
+                "base_url"
+            ],
+            "properties": {
+                "base_url": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 8,
+                    "example": "http://localhost:3000/s"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.CreateSurveyRequest": {
+            "type": "object",
+            "required": [
+                "questions",
+                "slug",
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "maxLength": 10000
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "slug": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "sortOrder": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "validation failed"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Xatolik yuz berdi"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.FormSubmitRequest": {
+            "type": "object",
+            "required": [
+                "answers",
+                "name",
+                "phone"
+            ],
+            "properties": {
+                "answers": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 2,
+                    "example": "Alisher Karimov"
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "minLength": 9,
+                    "example": "+998901234567"
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.MessageResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "message": {
+                    "type": "string",
+                    "example": "Muvaffaqiyatli"
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": true
+                }
+            }
+        },
+        "github_com_foydalanuvchilar-bazasi_backend_internal_modules_survey_dto.UpdateSurveyRequest": {
+            "type": "object",
+            "required": [
+                "questions",
+                "slug",
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "maxLength": 10000
+                },
+                "questions": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "slug": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "sortOrder": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 255
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "JWT token. Format: Bearer {token}",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
