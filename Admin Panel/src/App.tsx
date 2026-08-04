@@ -8,6 +8,7 @@ import { AdminsPage } from './pages/AdminsPage'
 import { CompaniesPage } from './pages/CompaniesPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { CardTemplatesPage } from './pages/CardTemplatesPage'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path={paths.admins} element={<AdminsPage />} />
             <Route path={paths.companies} element={<CompaniesPage />} />
+            <Route path={paths.cards} element={<CardTemplatesPage />} />
             <Route path={paths.settings} element={<SettingsPage />} />
             <Route path={paths.profile} element={<ProfilePage />} />
           </Route>

@@ -8,6 +8,8 @@ import { SettingsPage } from './pages/SettingsPage'
 import { SurveysPage } from './pages/SurveysPage'
 import { SurveyEditorPage } from './pages/SurveyEditorPage'
 import { SurveyResponsesPage } from './pages/SurveyResponsesPage'
+import { CardsPage } from './pages/CardsPage'
+import { AppointmentsPage } from './pages/AppointmentsPage'
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="surveys/responses" element={<SurveyResponsesPage />} />
           <Route path="surveys/:id/edit" element={<SurveyEditorPage />} />
           <Route path="surveys/:id/responses" element={<SurveyResponsesPage />} />
+          <Route path="appointments" element={<AppointmentsPage />} />
+          <Route path="cards" element={<CardsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>

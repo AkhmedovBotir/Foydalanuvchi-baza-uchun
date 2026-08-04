@@ -11,7 +11,9 @@ import {
 } from '@mui/material'
 import {
   AssignmentRounded,
+  ContactMailRounded,
   DashboardRounded,
+  EventAvailableRounded,
   LinkRounded,
   MenuRounded,
   SettingsRounded,
@@ -19,7 +21,13 @@ import {
 import { useAuth } from '../auth/AuthContext'
 import { AppSidebar, type NavItem } from '../components/AppSidebar'
 
-type NavKey = 'Bosh sahifa' | 'So‘rovnomalar' | 'Sozlamalar' | 'Profil'
+type NavKey =
+  | 'Bosh sahifa'
+  | 'So‘rovnomalar'
+  | 'Qabul'
+  | 'Vizitkalar'
+  | 'Sozlamalar'
+  | 'Profil'
 
 type AppNavItem = NavItem<NavKey> & { path: string }
 
@@ -30,6 +38,16 @@ const NAV: AppNavItem[] = [
     path: '/surveys',
     icon: <AssignmentRounded fontSize="small" />,
   },
+  {
+    label: 'Qabul',
+    path: '/appointments',
+    icon: <EventAvailableRounded fontSize="small" />,
+  },
+  {
+    label: 'Vizitkalar',
+    path: '/cards',
+    icon: <ContactMailRounded fontSize="small" />,
+  },
   { label: 'Sozlamalar', path: '/settings', icon: <LinkRounded fontSize="small" /> },
   { label: 'Profil', path: '/profile', icon: <SettingsRounded fontSize="small" /> },
 ]
@@ -37,6 +55,8 @@ const NAV: AppNavItem[] = [
 const TITLE_BY_PATH: Record<string, NavKey> = {
   '/': 'Bosh sahifa',
   '/surveys': 'So‘rovnomalar',
+  '/appointments': 'Qabul',
+  '/cards': 'Vizitkalar',
   '/settings': 'Sozlamalar',
   '/profile': 'Profil',
 }
@@ -44,6 +64,8 @@ const TITLE_BY_PATH: Record<string, NavKey> = {
 function resolveTitle(pathname: string): NavKey {
   if (TITLE_BY_PATH[pathname]) return TITLE_BY_PATH[pathname]
   if (pathname.startsWith('/surveys')) return 'So‘rovnomalar'
+  if (pathname.startsWith('/appointments')) return 'Qabul'
+  if (pathname.startsWith('/cards')) return 'Vizitkalar'
   if (pathname.startsWith('/settings')) return 'Sozlamalar'
   if (pathname.startsWith('/profile')) return 'Profil'
   return 'Bosh sahifa'
@@ -80,7 +102,11 @@ export function AppLayout() {
         onClose={() => setMenuOpen(false)}
         items={NAV}
         active={activeNav}
-        onNavigate={(label) => {
+        onNavigate={(label, path) => {
+          if (path) {
+            navigate(path)
+            return
+          }
           const item = NAV.find((n) => n.label === label)
           if (item) navigate(item.path)
         }}
@@ -159,21 +185,9 @@ export function AppLayout() {
         </motion.div>
 
         <Box component="main" className="flex-1 p-4 sm:p-6 lg:p-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.08 } },
-              }}
-              initial="hidden"
-              animate="show"
-              exit={{ opacity: 0, y: 8 }}
-              className="mx-auto flex w-full max-w-6xl flex-col gap-5"
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-5">
+            <Outlet />
+          </div>
         </Box>
       </Box>
     </Box>

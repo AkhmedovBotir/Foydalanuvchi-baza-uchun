@@ -20,11 +20,13 @@ import {
   AddRounded,
   AssignmentRounded,
   BarChartRounded,
+  ContactMailRounded,
   DeleteOutlineRounded,
   EditRounded,
   InboxRounded,
   LockRounded,
   PublishRounded,
+  QrCode2Rounded,
   RefreshRounded,
   SearchRounded,
 } from '@mui/icons-material'
@@ -34,6 +36,9 @@ import {
   listSurveys,
   publishSurvey,
 } from '../api/surveys'
+import { listCards } from '../api/cards'
+import type { CompanyCard } from '../api/cardTypes'
+import { SurveyCardPreviewModal } from '../components/cards/SurveyCardPreviewModal'
 import { ApiError } from '../api/client'
 import type { Survey, SurveyStatus } from '../api/types'
 import { STATUS_META, descriptionToPlain } from '../lib/survey'
@@ -76,11 +81,18 @@ export function SurveysSection() {
     survey: Survey
   } | null>(null)
   const [busy, setBusy] = useState(false)
+  const [cardsBySurvey, setCardsBySurvey] = useState<Record<string, CompanyCard>>({})
+  const [cardPreview, setCardPreview] = useState<Survey | null>(null)
 
   const load = async () => {
     try {
-      const data = await listSurveys()
+      const [data, cards] = await Promise.all([listSurveys(), listCards().catch(() => [])])
       setSurveys(data ?? [])
+      const map: Record<string, CompanyCard> = {}
+      for (const c of cards ?? []) {
+        if (c.surveyId) map[c.surveyId] = c
+      }
+      setCardsBySurvey(map)
     } catch (err) {
       showSnack(
         err instanceof ApiError ? err.message : 'So‘rovnomalarni yuklab bo‘lmadi',
@@ -318,6 +330,27 @@ export function SurveysSection() {
                       </div>
                     )}
 
+                    {cardsBySurvey[item.id] && (
+                      <button
+                        type="button"
+                        onClick={() => setCardPreview(item)}
+                        className="mb-4 flex w-full items-center gap-3 rounded-xl border border-teal-100 bg-teal-50/60 px-3 py-2.5 text-left transition hover:bg-teal-50"
+                      >
+                        <span className="grid h-9 w-9 place-items-center rounded-lg bg-teal-600 text-white">
+                          <ContactMailRounded fontSize="small" />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-xs font-semibold text-teal-900">
+                            Biriktirilgan vizitka
+                          </span>
+                          <span className="block truncate text-xs text-teal-800/80">
+                            {cardsBySurvey[item.id].name}
+                          </span>
+                        </span>
+                        <QrCode2Rounded className="text-teal-700" fontSize="small" />
+                      </button>
+                    )}
+
                     <div className="mt-auto grid grid-cols-2 gap-2 text-xs text-slate-500">
                       <div className="rounded-lg bg-slate-50 px-2.5 py-2">{qCount} savol</div>
                       <div className="rounded-lg bg-slate-50 px-2.5 py-2">
@@ -426,6 +459,15 @@ export function SurveysSection() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {cardPreview && (
+        <SurveyCardPreviewModal
+          open={Boolean(cardPreview)}
+          surveyId={cardPreview.slug || cardPreview.id}
+          surveyTitle={cardPreview.title}
+          onClose={() => setCardPreview(null)}
+        />
+      )}
     </>
   )
 }

@@ -16,6 +16,8 @@ import { useSnack } from '../ui/SnackProvider'
 export type NavItem<T extends string = string> = {
   label: T
   icon: ReactNode
+  /** To‘g‘ridan-to‘g‘ri marshrut (ixtiyoriy — berilsa shu bo‘yicha ochiladi) */
+  path?: string
 }
 
 type AppSidebarProps<T extends string> = {
@@ -23,7 +25,7 @@ type AppSidebarProps<T extends string> = {
   onClose: () => void
   items: NavItem<T>[]
   active: T
-  onNavigate: (label: T) => void
+  onNavigate: (label: T, path?: string) => void
   company: Company | null
   onLogout: () => void
 }
@@ -137,9 +139,8 @@ export function AppSidebar<T extends string>({
                 whileHover={{ x: 4 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => {
-                  onNavigate(item.label)
+                  onNavigate(item.label, item.path)
                   onClose()
-                  showSnack(`${item.label} ochildi`, 'info')
                 }}
                 className={[
                   'group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200',

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { AppBar, Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import {
   ApartmentRounded,
+  ContactMailRounded,
   DashboardRounded,
   ManageAccountsRounded,
   MenuRounded,
@@ -14,12 +15,23 @@ import { useAuth } from '../auth/AuthContext'
 import { AppSidebar, type NavItem } from '../components/AppSidebar'
 import { paths, routeTitles } from '../routes/paths'
 
-type NavKey = 'Bosh sahifa' | 'Adminlar' | 'Kompaniyalar' | 'Sozlamalar' | 'Profil'
+type NavKey =
+  | 'Bosh sahifa'
+  | 'Adminlar'
+  | 'Kompaniyalar'
+  | 'Vizitka shablonlari'
+  | 'Sozlamalar'
+  | 'Profil'
 
 const NAV: { label: NavKey; path: string; icon: ReactNode }[] = [
   { label: 'Bosh sahifa', path: paths.home, icon: <DashboardRounded fontSize="small" /> },
   { label: 'Adminlar', path: paths.admins, icon: <PeopleAltRounded fontSize="small" /> },
   { label: 'Kompaniyalar', path: paths.companies, icon: <ApartmentRounded fontSize="small" /> },
+  {
+    label: 'Vizitka shablonlari',
+    path: paths.cards,
+    icon: <ContactMailRounded fontSize="small" />,
+  },
   { label: 'Sozlamalar', path: paths.settings, icon: <TuneRounded fontSize="small" /> },
   { label: 'Profil', path: paths.profile, icon: <ManageAccountsRounded fontSize="small" /> },
 ]
