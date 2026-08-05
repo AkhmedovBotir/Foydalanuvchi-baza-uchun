@@ -1,4 +1,5 @@
 import { apiRequest, getToken } from './client'
+import { apiUrl } from './config'
 import type { CardTemplate, CardTextField } from './cardTypes'
 
 export function listCardTemplates() {
@@ -32,7 +33,7 @@ export function updateCardTemplate(
 
 export async function createCardTemplate(form: FormData): Promise<CardTemplate> {
   const token = getToken()
-  const res = await fetch('/api/v1/card-templates', {
+  const res = await fetch(apiUrl('/card-templates'), {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -49,7 +50,7 @@ export async function createCardTemplate(form: FormData): Promise<CardTemplate> 
 
 export async function fetchTemplateImageBlob(id: string): Promise<Blob> {
   const token = getToken()
-  const res = await fetch(`/api/v1/card-templates/${id}/image`, {
+  const res = await fetch(apiUrl(`/card-templates/${id}/image`), {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   })
   if (!res.ok) throw new Error('Rasmni yuklab bo‘lmadi')

@@ -631,7 +631,9 @@ export function AppointmentsPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, maxDaysAhead: Number(e.target.value) || 30 }))
               }
-              inputProps={{ min: 1, max: 365 }}
+              slotProps={{
+                htmlInput: { min: 1, max: 365 },
+              }}
             />
           </div>
 
@@ -667,7 +669,7 @@ export function AppointmentsPage() {
                     schedule[idx] = { ...day, start: e.target.value }
                     setForm((f) => ({ ...f, schedule }))
                   }}
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
                 <TextField
                   type="time"
@@ -680,7 +682,7 @@ export function AppointmentsPage() {
                     schedule[idx] = { ...day, end: e.target.value }
                     setForm((f) => ({ ...f, schedule }))
                   }}
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
               </div>
             ))}

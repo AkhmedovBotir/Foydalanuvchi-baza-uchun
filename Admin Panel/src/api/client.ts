@@ -1,4 +1,5 @@
 import type { ApiErrorBody, ApiSuccess } from './types'
+import { apiUrl } from './config'
 
 const TOKEN_KEY = 'admin_token'
 
@@ -49,7 +50,7 @@ export async function apiRequest<T>(
     headers.Authorization = `Bearer ${token}`
   }
 
-  const res = await fetch(`/api/v1${path}`, {
+  const res = await fetch(apiUrl(path), {
     method,
     headers,
     body: body === undefined ? undefined : JSON.stringify(body),

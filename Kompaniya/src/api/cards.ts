@@ -1,4 +1,5 @@
 import { apiRequest, getToken } from './client'
+import { apiUrl } from './config'
 import type {
   CardBrief,
   CardLayout,
@@ -43,7 +44,7 @@ export function createFromTemplate(body: {
 }
 
 export async function createCustomCard(form: FormData): Promise<CompanyCard> {
-  const res = await fetch('/api/v1/company/cards', {
+  const res = await fetch(apiUrl('/company/cards'), {
     method: 'POST',
     headers: authHeaders(),
     body: form,
@@ -84,7 +85,7 @@ export function getCardLayout(id: string) {
 }
 
 export async function fetchCardBlob(path: string): Promise<Blob> {
-  const res = await fetch(path.startsWith('/api') ? path : `/api/v1${path}`, {
+  const res = await fetch(apiUrl(path), {
     headers: authHeaders(),
   })
   if (!res.ok) throw new Error('Yuklab bo‘lmadi')
@@ -93,7 +94,7 @@ export async function fetchCardBlob(path: string): Promise<Blob> {
 
 export async function downloadCardPdf(id: string, copies?: number) {
   const q = copies ? `?copies=${copies}` : ''
-  const res = await fetch(`/api/v1/company/cards/${id}/pdf${q}`, {
+  const res = await fetch(apiUrl(`/company/cards/${id}/pdf${q}`), {
     headers: authHeaders(),
   })
   if (!res.ok) {

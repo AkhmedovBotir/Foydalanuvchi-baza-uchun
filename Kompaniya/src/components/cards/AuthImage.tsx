@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getToken } from '../../api/client'
+import { apiUrl } from '../../api/config'
 
 type Props = {
   path: string
@@ -14,8 +15,7 @@ export function AuthImage({ path, alt = '', className }: Props) {
     let revoked: string | null = null
     let cancelled = false
     const token = getToken()
-    const full = path.startsWith('/api') ? path : `/api/v1${path.replace(/^\/api\/v1/, '')}`
-    void fetch(full.startsWith('/api') ? full : path, {
+    void fetch(apiUrl(path), {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then((res) => {

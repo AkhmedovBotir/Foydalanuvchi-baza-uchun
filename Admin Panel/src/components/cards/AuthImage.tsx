@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getToken } from '../../api/client'
+import { apiUrl } from '../../api/config'
 
 type Props = {
   path: string
@@ -7,7 +8,7 @@ type Props = {
   className?: string
 }
 
-/** JWT bilan himoyalangan rasm yo‘lini ko‘rsatadi (`/api/v1/...`). */
+/** JWT bilan himoyalangan rasm yo‘lini ko‘rsatadi. */
 export function AuthImage({ path, alt = '', className }: Props) {
   const [url, setUrl] = useState<string | null>(null)
 
@@ -15,7 +16,7 @@ export function AuthImage({ path, alt = '', className }: Props) {
     let revoked: string | null = null
     let cancelled = false
     const token = getToken()
-    void fetch(path, {
+    void fetch(apiUrl(path), {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then((res) => {

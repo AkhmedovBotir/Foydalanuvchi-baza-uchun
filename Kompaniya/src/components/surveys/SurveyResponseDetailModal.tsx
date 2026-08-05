@@ -22,6 +22,7 @@ import {
   VideocamRounded,
 } from '@mui/icons-material'
 import type { Question, QuestionType, SurveyResponseDetail } from '../../api/types'
+import { apiUrl } from '../../api/config'
 import { QUESTION_TYPE_LABELS, STATUS_META, typeIsFile } from '../../lib/survey'
 
 const headingFont = { fontFamily: "'Outfit', sans-serif" }
@@ -45,30 +46,13 @@ function formatDate(value?: string | null) {
   })
 }
 
-/** Backend static files: /uploads/... → Vite proxy → :8080 */
+/** Backend static files va API resource yo‘llari */
 function resolveFileUrl(raw: string): string {
   const value = raw.trim()
   if (!value) return ''
   if (value.startsWith('blob:') || value.startsWith('data:')) return value
-
-  // Absolute URL: uploads pathini relative qilib proxy orqali ochamiz
-  if (/^https?:\/\//i.test(value)) {
-    try {
-      const u = new URL(value)
-      if (u.pathname.startsWith('/uploads/')) {
-        return `${u.pathname}${u.search}`
-      }
-      return value
-    } catch {
-      return value
-    }
-  }
-
-  if (value.startsWith('/uploads/') || value.startsWith('/files/')) return value
-  if (value.startsWith('/')) return value
-  if (value.startsWith('api/')) return `/${value}`
-  if (value.startsWith('uploads/') || value.startsWith('files/')) return `/${value}`
-  return `/api/v1/${value.replace(/^\//, '')}`
+  if (/^https?:\/\//i.test(value)) return value
+  return apiUrl(value)
 }
 
 function extOf(url: string): string {
