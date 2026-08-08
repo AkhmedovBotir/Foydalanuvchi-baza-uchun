@@ -48,6 +48,8 @@ type CompanyCardResponse struct {
 	AppointmentSlug  string         `json:"appointmentSlug,omitempty"`
 	AppointmentTitle string         `json:"appointmentTitle,omitempty"`
 	BookingURL       string         `json:"bookingUrl,omitempty"`
+	ReferralID       *string        `json:"referralId,omitempty"`
+	ReferralName     string         `json:"referralName,omitempty"`
 	CreatedAt        string         `json:"createdAt"`
 	UpdatedAt        string         `json:"updatedAt"`
 }

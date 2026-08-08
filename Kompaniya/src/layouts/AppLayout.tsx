@@ -10,13 +10,18 @@ import {
   Typography,
 } from '@mui/material'
 import {
+  AccountBalanceWalletRounded,
   AssignmentRounded,
   ContactMailRounded,
   DashboardRounded,
   EventAvailableRounded,
+  FactCheckRounded,
   LinkRounded,
+  LocalHospitalRounded,
   MenuRounded,
+  PersonPinRounded,
   SettingsRounded,
+  ShareRounded,
 } from '@mui/icons-material'
 import { useAuth } from '../auth/AuthContext'
 import { AppSidebar, type NavItem } from '../components/AppSidebar'
@@ -25,6 +30,11 @@ type NavKey =
   | 'Bosh sahifa'
   | 'So‘rovnomalar'
   | 'Qabul'
+  | 'Navbat'
+  | 'Registratorlar'
+  | 'Shifokorlar'
+  | 'Referallar'
+  | 'Moliya'
   | 'Vizitkalar'
   | 'Sozlamalar'
   | 'Profil'
@@ -44,6 +54,31 @@ const NAV: AppNavItem[] = [
     icon: <EventAvailableRounded fontSize="small" />,
   },
   {
+    label: 'Navbat',
+    path: '/workflow',
+    icon: <FactCheckRounded fontSize="small" />,
+  },
+  {
+    label: 'Registratorlar',
+    path: '/registrators',
+    icon: <PersonPinRounded fontSize="small" />,
+  },
+  {
+    label: 'Shifokorlar',
+    path: '/doctors',
+    icon: <LocalHospitalRounded fontSize="small" />,
+  },
+  {
+    label: 'Referallar',
+    path: '/referrals',
+    icon: <ShareRounded fontSize="small" />,
+  },
+  {
+    label: 'Moliya',
+    path: '/finance',
+    icon: <AccountBalanceWalletRounded fontSize="small" />,
+  },
+  {
     label: 'Vizitkalar',
     path: '/cards',
     icon: <ContactMailRounded fontSize="small" />,
@@ -56,6 +91,11 @@ const TITLE_BY_PATH: Record<string, NavKey> = {
   '/': 'Bosh sahifa',
   '/surveys': 'So‘rovnomalar',
   '/appointments': 'Qabul',
+  '/workflow': 'Navbat',
+  '/registrators': 'Registratorlar',
+  '/doctors': 'Shifokorlar',
+  '/referrals': 'Referallar',
+  '/finance': 'Moliya',
   '/cards': 'Vizitkalar',
   '/settings': 'Sozlamalar',
   '/profile': 'Profil',
@@ -65,6 +105,11 @@ function resolveTitle(pathname: string): NavKey {
   if (TITLE_BY_PATH[pathname]) return TITLE_BY_PATH[pathname]
   if (pathname.startsWith('/surveys')) return 'So‘rovnomalar'
   if (pathname.startsWith('/appointments')) return 'Qabul'
+  if (pathname.startsWith('/workflow')) return 'Navbat'
+  if (pathname.startsWith('/registrators')) return 'Registratorlar'
+  if (pathname.startsWith('/doctors')) return 'Shifokorlar'
+  if (pathname.startsWith('/referrals')) return 'Referallar'
+  if (pathname.startsWith('/finance')) return 'Moliya'
   if (pathname.startsWith('/cards')) return 'Vizitkalar'
   if (pathname.startsWith('/settings')) return 'Sozlamalar'
   if (pathname.startsWith('/profile')) return 'Profil'

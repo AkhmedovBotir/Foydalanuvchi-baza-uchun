@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getToken } from '../../api/client'
-import { apiUrl } from '../../api/config'
+import { apiUrl } from '../../config/api'
 
 type Props = {
   path: string

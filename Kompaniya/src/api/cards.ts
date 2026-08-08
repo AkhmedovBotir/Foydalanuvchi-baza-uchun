@@ -1,5 +1,5 @@
 import { apiRequest, getToken } from './client'
-import { apiUrl } from './config'
+import { apiUrl } from '../config/api'
 import type {
   CardBrief,
   CardLayout,

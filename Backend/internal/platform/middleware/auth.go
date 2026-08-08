@@ -14,6 +14,8 @@ const (
 	ContextAdminUsername   = "admin_username"
 	ContextCompanyID       = "company_id"
 	ContextCompanyUsername = "company_username"
+	ContextStaffID         = "staff_id"
+	ContextStaffUsername   = "staff_username"
 	ContextRole            = "role"
 
 	// Legacy alias — mavjud admin handlerlar uchun
@@ -26,6 +28,14 @@ func AdminAuth(jwtSecret string) gin.HandlerFunc {
 
 func CompanyAuth(jwtSecret string) gin.HandlerFunc {
 	return roleAuth(jwtSecret, []string{"company"})
+}
+
+func RegistratorAuth(jwtSecret string) gin.HandlerFunc {
+	return roleAuth(jwtSecret, []string{"registrator"})
+}
+
+func DoctorAuth(jwtSecret string) gin.HandlerFunc {
+	return roleAuth(jwtSecret, []string{"doctor"})
 }
 
 func AdminOrCompanyAuth(jwtSecret string) gin.HandlerFunc {
@@ -95,6 +105,12 @@ func roleAuth(jwtSecret string, allowedRoles []string) gin.HandlerFunc {
 		case "company":
 			c.Set(ContextCompanyID, id)
 			c.Set(ContextCompanyUsername, username)
+		case "registrator", "doctor":
+			c.Set(ContextStaffID, id)
+			c.Set(ContextStaffUsername, username)
+			if cid, ok := claims["company_id"].(string); ok && cid != "" {
+				c.Set(ContextCompanyID, cid)
+			}
 		}
 		c.Next()
 	}

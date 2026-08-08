@@ -59,18 +59,23 @@ export function AppSidebar<T extends string>({
       sx={{
         '& .MuiDrawer-paper': {
           width: 300,
+          height: '100%',
+          maxHeight: '100dvh',
           border: 0,
           background: 'transparent',
           boxShadow: 'none',
+          overflow: 'hidden',
         },
       }}
     >
-      <Box className="flex h-full flex-col overflow-hidden rounded-r-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-teal-950 text-slate-100 shadow-2xl shadow-slate-900/40">
+      <Box
+        className="flex h-full min-h-0 max-h-[100dvh] flex-col overflow-hidden rounded-r-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-teal-950 text-slate-100 shadow-2xl shadow-slate-900/40"
+      >
         <motion.div
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.28 }}
-          className="relative overflow-hidden px-5 pb-5 pt-4"
+          className="relative shrink-0 overflow-hidden px-5 pb-5 pt-4"
         >
           <div className="pointer-events-none absolute -right-8 -top-10 h-36 w-36 rounded-full bg-teal-400/20 blur-2xl" />
           <div className="pointer-events-none absolute bottom-0 left-6 h-20 w-20 rounded-full bg-sky-400/10 blur-xl" />
@@ -121,10 +126,10 @@ export function AppSidebar<T extends string>({
           </motion.div>
         </motion.div>
 
-        <Divider sx={{ borderColor: 'rgba(148,163,184,0.15)' }} />
+        <Divider sx={{ borderColor: 'rgba(148,163,184,0.15)', flexShrink: 0 }} />
 
-        <nav className="flex flex-1 flex-col gap-1.5 px-3 py-4">
-          <p className="mb-1 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
+        <nav className="sidebar-nav flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto overscroll-contain px-3 py-4">
+          <p className="mb-1 shrink-0 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">
             Menyular
           </p>
           {items.map((item, index) => {
@@ -143,7 +148,7 @@ export function AppSidebar<T extends string>({
                   onClose()
                 }}
                 className={[
-                  'group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200',
+                  'group flex w-full shrink-0 items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200',
                   selected
                     ? 'bg-teal-500/20 text-white shadow-[inset_0_0_0_1px_rgba(45,212,191,0.35)]'
                     : 'text-slate-300 hover:bg-white/5 hover:text-white',
@@ -182,13 +187,8 @@ export function AppSidebar<T extends string>({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mt-auto space-y-3 p-4"
+          className="shrink-0 border-t border-white/10 p-4"
         >
-          <div className="rounded-2xl border border-teal-400/20 bg-gradient-to-br from-teal-500/15 to-sky-500/10 px-3.5 py-3">
-            <p className="text-xs font-medium text-teal-100/90">
-              So‘rovnomalar va profilingizni bir joydan boshqaring
-            </p>
-          </div>
           <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
             <Button
               fullWidth

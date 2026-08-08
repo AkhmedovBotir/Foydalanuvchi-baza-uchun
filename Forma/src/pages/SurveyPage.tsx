@@ -22,6 +22,8 @@ import {
 import { getForm, submitForm, uploadFormFile } from '../api/forms'
 import { QuestionField } from '../components/QuestionField'
 import type { RespondentField, SurveyForm, SurveyQuestion } from '../types/survey'
+import { PhoneField } from '../ui/PhoneField'
+import { isValidUzPhone } from '../lib/phone'
 
 const theme = createTheme({
   palette: {
@@ -80,8 +82,8 @@ function validateRespondentValue(field: RespondentField, raw: string): string | 
     }
   }
   if (field.key === 'phone' || field.type === 'phone') {
-    if (field.required !== false && value.length < 9) {
-      return `${field.label} kamida 9 belgi bo‘lishi kerak`
+    if (!isValidUzPhone(value)) {
+      return `${field.label} to‘liq bo‘lishi kerak (90 123 45 67)`
     }
   }
   if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
@@ -387,7 +389,9 @@ export function SurveyPage() {
         respondentFields.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
       }`}
     >
-      {respondentFields.map((field) => (
+      {respondentFields.map((field) => {
+        const isPhone = field.type === 'phone' || field.key === 'phone'
+        return (
         <div key={field.key} className="space-y-1.5">
           <label className="text-sm font-semibold text-slate-700">
             {field.label}
@@ -395,15 +399,37 @@ export function SurveyPage() {
               <span className="text-teal-600"> *</span>
             )}
           </label>
+          {isPhone ? (
+            <PhoneField
+              label={undefined}
+              value={respondent[field.key] ?? ''}
+              onChange={(phone) => {
+                setRespondent((prev) => ({ ...prev, [field.key]: phone }))
+                setFieldErrors((prev) => {
+                  const next = { ...prev }
+                  delete next[field.key]
+                  return next
+                })
+              }}
+              disabled={closed || submitting}
+              error={Boolean(fieldErrors[field.key])}
+              helperText={
+                fieldErrors[field.key] ||
+                field.description ||
+                'Masalan: 90 123 45 67'
+              }
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '14px',
+                  backgroundColor: '#fff',
+                },
+              }}
+            />
+          ) : (
           <TextField
             fullWidth
             type={inputTypeFor(field)}
-            placeholder={
-              field.placeholder ||
-              (field.type === 'phone' || field.key === 'phone'
-                ? '+998901234567'
-                : field.label)
-            }
+            placeholder={field.placeholder || field.label}
             value={respondent[field.key] ?? ''}
             onChange={(e) => {
               const value = e.target.value
@@ -416,13 +442,7 @@ export function SurveyPage() {
             }}
             disabled={closed || submitting}
             error={Boolean(fieldErrors[field.key])}
-            helperText={
-              fieldErrors[field.key] ||
-              field.description ||
-              (field.type === 'phone' || field.key === 'phone'
-                ? 'Masalan: +998901234567'
-                : undefined)
-            }
+            helperText={fieldErrors[field.key] || field.description}
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: '14px',
@@ -430,8 +450,10 @@ export function SurveyPage() {
               },
             }}
           />
+          )}
         </div>
-      ))}
+        )
+      })}
     </div>
   )
 

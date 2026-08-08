@@ -58,6 +58,7 @@ import {
 } from '../api/appointmentTypes'
 import { ApiError } from '../api/client'
 import { useSnack } from '../ui/SnackProvider'
+import { useConfirm } from '../ui/ConfirmProvider'
 import { AppointmentCardWorkspace } from '../components/cards/AppointmentCardWorkspace'
 
 const headingFont = { fontFamily: "'Outfit', sans-serif" }
@@ -86,6 +87,7 @@ function emptyForm(): UpsertAppointmentPayload & { schedule: DaySchedule[] } {
 
 export function AppointmentsPage() {
   const { showSnack } = useSnack()
+  const confirm = useConfirm()
   const [items, setItems] = useState<AppointmentService[]>([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -369,7 +371,13 @@ export function AppointmentsPage() {
                           size="small"
                           color="error"
                           onClick={async () => {
-                            if (!confirm(`«${s.title}» o‘chirilsinmi?`)) return
+                            const ok = await confirm({
+                              title: 'Xizmatni o‘chirish',
+                              message: `«${s.title}» o‘chirilsinmi?`,
+                              confirmLabel: 'O‘chirish',
+                              danger: true,
+                            })
+                            if (!ok) return
                             try {
                               await deleteAppointment(s.id)
                               showSnack('O‘chirildi', 'success')
@@ -631,9 +639,7 @@ export function AppointmentsPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, maxDaysAhead: Number(e.target.value) || 30 }))
               }
-              slotProps={{
-                htmlInput: { min: 1, max: 365 },
-              }}
+              slotProps={{ htmlInput: { min: 1, max: 365 } }}
             />
           </div>
 

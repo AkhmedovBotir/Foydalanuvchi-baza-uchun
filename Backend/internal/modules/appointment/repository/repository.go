@@ -156,11 +156,11 @@ func (r *Repository) CreateBooking(ctx context.Context, b *domain.Booking) error
 	_, err := r.db.ExecContext(ctx, `
 		INSERT INTO appointment_bookings (
 			id, service_id, company_id, booking_date, slot_start, slot_end,
-			respondent_name, respondent_phone, purpose, status, conclusion, created_at, updated_at
-		) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+			respondent_name, respondent_phone, purpose, status, conclusion, referral_id, created_at, updated_at
+		) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
 		b.ID, b.ServiceID, b.CompanyID, b.BookingDate.Format("2006-01-02"),
 		b.SlotStart, b.SlotEnd, b.RespondentName, b.RespondentPhone, b.Purpose,
-		b.Status, b.Conclusion, b.CreatedAt, b.UpdatedAt,
+		b.Status, b.Conclusion, nullStr(b.ReferralID), b.CreatedAt, b.UpdatedAt,
 	)
 	if err != nil {
 		return mapPQ(err)
@@ -262,6 +262,15 @@ func (r *Repository) BookedStarts(ctx context.Context, serviceID string, date ti
 		out[normalizeTime(s)] = true
 	}
 	return out, rows.Err()
+}
+
+func (r *Repository) ReferralInCompany(ctx context.Context, companyID, referralID string) (bool, error) {
+	var n int
+	err := r.db.QueryRowContext(ctx, `
+		SELECT COUNT(*) FROM company_referrals WHERE id=$1 AND company_id=$2`,
+		referralID, companyID,
+	).Scan(&n)
+	return n > 0, err
 }
 
 func (r *Repository) Summary(ctx context.Context, companyID, serviceID string) (total, pending, confirmed, completed, cancelled, today, week int, err error) {

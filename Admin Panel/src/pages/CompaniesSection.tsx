@@ -36,6 +36,10 @@ import {
 import { ApiError } from '../api/client'
 import type { Company } from '../api/types'
 import { useSnack } from '../ui/SnackProvider'
+import { useConfirm } from '../ui/ConfirmProvider'
+import { PhoneField } from '../ui/PhoneField'
+import { PasswordField } from '../ui/PasswordField'
+import { isValidUzPhone } from '../lib/phone'
 
 const headingFont = { fontFamily: "'Outfit', sans-serif" }
 const MotionPaper = motion.create(Paper)
@@ -82,6 +86,7 @@ function initials(name: string) {
 
 export function CompaniesSection() {
   const { showSnack } = useSnack()
+  const confirm = useConfirm()
   const [companies, setCompanies] = useState<Company[]>([])
   const [loading, setLoading] = useState(true)
   const [query, setQuery] = useState('')
@@ -142,6 +147,10 @@ export function CompaniesSection() {
       showSnack('Nomi, telefon va login majburiy', 'warning')
       return
     }
+    if (!isValidUzPhone(form.phone)) {
+      showSnack('Telefon +998 90 123 45 67 formatida to‘liq bo‘lishi kerak', 'warning')
+      return
+    }
 
     if (editingId == null && form.password.length < 6) {
       showSnack('Parol kamida 6 ta belgidan iborat bo‘lishi kerak', 'warning')
@@ -182,7 +191,13 @@ export function CompaniesSection() {
   }
 
   const removeCompany = async (id: string) => {
-    if (!window.confirm('Bu kompaniyani o‘chirishni tasdiqlaysizmi?')) return
+    const ok = await confirm({
+      title: 'Kompaniyani o‘chirish',
+      message: 'Bu kompaniyani o‘chirishni tasdiqlaysizmi? Bu amalni qaytarib bo‘lmaydi.',
+      confirmLabel: 'O‘chirish',
+      danger: true,
+    })
+    if (!ok) return
     try {
       await deleteCompany(id)
       showSnack('Kompaniya o‘chirildi', 'success')
@@ -445,13 +460,11 @@ export function CompaniesSection() {
               required
             />
             <Box className="grid gap-2.5 sm:grid-cols-2">
-              <TextField
+              <PhoneField
                 label="Telefon"
                 value={form.phone}
-                onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                fullWidth
+                onChange={(phone) => setForm((f) => ({ ...f, phone }))}
                 required
-                placeholder="+998901234567"
               />
               <TextField
                 label="Login"
@@ -461,18 +474,17 @@ export function CompaniesSection() {
                 required
               />
             </Box>
-            <TextField
+            <PasswordField
               label={editingId == null ? 'Parol' : 'Yangi parol (ixtiyoriy)'}
-              type="password"
               value={form.password}
-              onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
-              fullWidth
+              onChange={(password) => setForm((f) => ({ ...f, password }))}
               required={editingId == null}
               helperText={
                 editingId == null
                   ? 'Kamida 6 belgi'
                   : 'Bo‘sh qoldirsangiz parol o‘zgarmaydi'
               }
+              autoComplete="new-password"
             />
           </Stack>
         </DialogContent>

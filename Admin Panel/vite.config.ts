@@ -13,14 +13,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://demo-api.ttsa.uz',
+        target: 'http://localhost:8080',
         changeOrigin: true,
-        secure: true,
       },
       '/health': {
-        target: 'https://demo-api.ttsa.uz',
+        target: 'http://localhost:8080',
         changeOrigin: true,
-        secure: true,
       },
     },
   },

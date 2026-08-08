@@ -268,6 +268,32 @@ func (r *Repository) AppointmentByCard(ctx context.Context, companyID, cardID st
 	return &a, nil
 }
 
+// ReferralLink — referal vizitkasi QR uchun.
+type ReferralLink struct {
+	ReferralID   string
+	ServiceSlug  string
+	ReferralName string
+	CompanyID    string
+}
+
+func (r *Repository) ReferralByCard(ctx context.Context, companyID, cardID string) (*ReferralLink, error) {
+	var a ReferralLink
+	err := r.db.QueryRowContext(ctx, `
+		SELECT r.id, r.company_id, r.name, COALESCE(s.slug,'')
+		FROM company_referrals r
+		LEFT JOIN appointment_services s ON s.id=r.service_id
+		WHERE r.company_id=$1 AND r.card_id=$2
+		LIMIT 1`, companyID, cardID,
+	).Scan(&a.ReferralID, &a.CompanyID, &a.ReferralName, &a.ServiceSlug)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &a, nil
+}
+
 func (r *Repository) SurveyCardID(ctx context.Context, companyID, surveyRef string) (*string, *SurveyLink, error) {
 	var cardID sql.NullString
 	var s SurveyLink

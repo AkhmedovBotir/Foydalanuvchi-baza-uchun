@@ -36,11 +36,12 @@ type AttachCardRequest struct {
 }
 
 type CreateBookingRequest struct {
-	Date    string `json:"date" binding:"required"`    // YYYY-MM-DD
+	Date      string `json:"date" binding:"required"`      // YYYY-MM-DD
 	SlotStart string `json:"slotStart" binding:"required"` // HH:MM
-	Name    string `json:"name" binding:"required,min=2,max=200"`
-	Phone   string `json:"phone" binding:"required,min=9,max=30"`
-	Purpose string `json:"purpose" binding:"max=2000"`
+	Name      string `json:"name" binding:"required,min=2,max=200"`
+	Phone     string `json:"phone" binding:"required,min=9,max=30"`
+	Purpose   string `json:"purpose" binding:"max=2000"`
+	ReferralID string `json:"referralId"` // optional — referal orqali
 }
 
 type BookingResponse struct {

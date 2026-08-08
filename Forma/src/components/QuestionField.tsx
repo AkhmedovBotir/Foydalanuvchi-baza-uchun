@@ -4,7 +4,6 @@ import {
   EmailRounded,
   LinkRounded,
   NumbersRounded,
-  PhoneRounded,
   ScheduleRounded,
 } from '@mui/icons-material'
 import {
@@ -18,6 +17,7 @@ import {
 } from '@mui/material'
 import type { SurveyQuestion } from '../types/survey'
 import { FileUploadField } from './FileUploadField'
+import { PhoneField } from '../ui/PhoneField'
 
 type Props = {
   question: SurveyQuestion
@@ -148,16 +148,32 @@ export function QuestionField({
     type === 'url' ||
     type === 'number'
   ) {
+    if (type === 'phone') {
+      return fieldShell(
+        title,
+        required,
+        description,
+        error,
+        <PhoneField
+          label={undefined}
+          value={String((value as string | number) ?? '')}
+          onChange={(v) => onChange(v)}
+          disabled={disabled}
+          error={Boolean(error)}
+          placeholder="90 123 45 67"
+          sx={pillSx}
+        />,
+      )
+    }
+
     const placeholders: Record<string, string> = {
       short_text: 'Javob yozing',
       email: 'Email yozing',
-      phone: 'Telefon raqamingiz',
       url: 'Havola bering',
       number: 'Raqam yozing',
     }
     const icons = {
       email: <EmailRounded fontSize="small" />,
-      phone: <PhoneRounded fontSize="small" />,
       url: <LinkRounded fontSize="small" />,
       number: <NumbersRounded fontSize="small" />,
     } as const

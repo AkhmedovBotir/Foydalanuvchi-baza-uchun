@@ -5,7 +5,9 @@ import type {
   PublicAppointment,
   SlotItem,
 } from '../types/booking'
-import { API_BASE } from './config'
+import { API_BASE_URL } from '../config/api'
+
+const API_BASE = API_BASE_URL
 
 async function parseJson<T>(res: Response): Promise<T> {
   const body = (await res.json().catch(() => null)) as
@@ -64,6 +66,7 @@ export async function createBooking(
     name: string
     phone: string
     purpose?: string
+    referralId?: string
   },
 ): Promise<BookingResult> {
   const res = await fetch(`${API_BASE}/bookings/${encodeURIComponent(slug)}`, {

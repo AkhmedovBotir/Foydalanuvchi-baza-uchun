@@ -68,6 +68,7 @@ type Booking struct {
 	Status           string
 	Conclusion       string
 	ConcludedAt      *time.Time
+	ReferralID       *string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }

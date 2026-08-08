@@ -1,5 +1,5 @@
 import type { ApiErrorBody, ApiSuccess } from './types'
-import { apiUrl } from './config'
+import { apiUrl } from '../config/api'
 
 const TOKEN_KEY = 'admin_token'
 

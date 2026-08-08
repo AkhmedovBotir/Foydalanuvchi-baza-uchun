@@ -10,6 +10,11 @@ import { SurveyEditorPage } from './pages/SurveyEditorPage'
 import { SurveyResponsesPage } from './pages/SurveyResponsesPage'
 import { CardsPage } from './pages/CardsPage'
 import { AppointmentsPage } from './pages/AppointmentsPage'
+import { RegistratorsPage } from './pages/RegistratorsPage'
+import { DoctorsPage } from './pages/DoctorsPage'
+import { ReferralsPage } from './pages/ReferralsPage'
+import { FinancePage } from './pages/FinancePage'
+import { WorkflowPage } from './pages/WorkflowPage'
 
 export default function App() {
   return (
@@ -27,6 +32,11 @@ export default function App() {
           <Route path="surveys/:id/edit" element={<SurveyEditorPage />} />
           <Route path="surveys/:id/responses" element={<SurveyResponsesPage />} />
           <Route path="appointments" element={<AppointmentsPage />} />
+          <Route path="workflow" element={<WorkflowPage />} />
+          <Route path="registrators" element={<RegistratorsPage />} />
+          <Route path="doctors" element={<DoctorsPage />} />
+          <Route path="referrals" element={<ReferralsPage />} />
+          <Route path="finance" element={<FinancePage />} />
           <Route path="cards" element={<CardsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="profile" element={<ProfilePage />} />

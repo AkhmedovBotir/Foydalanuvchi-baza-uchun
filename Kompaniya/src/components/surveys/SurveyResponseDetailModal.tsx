@@ -22,8 +22,8 @@ import {
   VideocamRounded,
 } from '@mui/icons-material'
 import type { Question, QuestionType, SurveyResponseDetail } from '../../api/types'
-import { apiUrl } from '../../api/config'
 import { QUESTION_TYPE_LABELS, STATUS_META, typeIsFile } from '../../lib/survey'
+import { apiUrl } from '../../config/api'
 
 const headingFont = { fontFamily: "'Outfit', sans-serif" }
 
@@ -46,13 +46,29 @@ function formatDate(value?: string | null) {
   })
 }
 
-/** Backend static files va API resource yo‘llari */
+/** Backend static files va API yo‘llarini demo hostga bog‘laydi. */
 function resolveFileUrl(raw: string): string {
   const value = raw.trim()
   if (!value) return ''
   if (value.startsWith('blob:') || value.startsWith('data:')) return value
-  if (/^https?:\/\//i.test(value)) return value
-  return apiUrl(value)
+
+  if (/^https?:\/\//i.test(value)) {
+    try {
+      const u = new URL(value)
+      if (u.pathname.startsWith('/uploads/') || u.pathname.startsWith('/files/')) {
+        return apiUrl(`${u.pathname}${u.search}`)
+      }
+      return value
+    } catch {
+      return value
+    }
+  }
+
+  if (value.startsWith('/uploads/') || value.startsWith('/files/')) return apiUrl(value)
+  if (value.startsWith('/')) return apiUrl(value)
+  if (value.startsWith('api/')) return apiUrl(`/${value}`)
+  if (value.startsWith('uploads/') || value.startsWith('files/')) return apiUrl(`/${value}`)
+  return apiUrl(`/${value.replace(/^\//, '')}`)
 }
 
 function extOf(url: string): string {

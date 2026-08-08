@@ -334,6 +334,16 @@ func (s *Service) CreateBooking(ctx context.Context, slug string, req dto.Create
 		Purpose: strings.TrimSpace(req.Purpose), Status: domain.BookingPending,
 		CreatedAt: nowUTC, UpdatedAt: nowUTC,
 	}
+	if rid := strings.TrimSpace(req.ReferralID); rid != "" {
+		okRef, err := s.repo.ReferralInCompany(ctx, svc.CompanyID, rid)
+		if err != nil {
+			return nil, err
+		}
+		if !okRef {
+			return nil, domain.ErrInvalidInput
+		}
+		b.ReferralID = &rid
+	}
 	if err := s.repo.CreateBooking(ctx, b); err != nil {
 		return nil, err
 	}

@@ -5,7 +5,9 @@ import type {
   SurveyForm,
   UploadResult,
 } from '../types/survey'
-import { API_BASE } from './config'
+import { API_BASE_URL } from '../config/api'
+
+const API_BASE = API_BASE_URL
 
 async function parseJson<T>(res: Response): Promise<T> {
   const body = (await res.json().catch(() => null)) as

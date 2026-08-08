@@ -23,8 +23,12 @@ import (
 	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/appointment"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/card"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/company"
+	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/finance"
+	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/referral"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/setting"
+	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/staff"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/survey"
+	"github.com/foydalanuvchilar-bazasi/backend/internal/modules/workflow"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/platform/database"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/platform/response"
 	"github.com/foydalanuvchilar-bazasi/backend/internal/platform/upload"
@@ -72,7 +76,7 @@ func main() {
 		ok("Migratsiya  yangilanish yo‘q (jami %d)", total)
 	}
 
-	step("Modullar", "admin · company · survey · card · appointment · settings")
+	step("Modullar", "admin · company · survey · card · appointment · referral · finance · staff · workflow · settings")
 	adminModule := admin.NewModule(db, cfg.JWT)
 	if err := adminModule.Seed(context.Background()); err != nil {
 		fail("Admin seed xatosi: %v", err)
@@ -90,6 +94,11 @@ func main() {
 		fail("Card upload katalogi: %v", err)
 	}
 	appointmentModule := appointment.NewModule(db, cfg.JWT, settingModule.Service)
+	referralModule := referral.NewModule(db, cfg.JWT, settingModule.Service)
+	financeModule := finance.NewModule(db, cfg.JWT)
+	staffModule := staff.NewModule(db, cfg.JWT)
+	workflowModule := workflow.NewModule(db, cfg.JWT)
+	workflowModule.SetFinance(financeModule.Service)
 	ok("Modullar tayyor")
 
 	// Route ro'yxatini logga yozmaslik
@@ -116,6 +125,10 @@ func main() {
 	surveyModule.RegisterRoutes(api)
 	cardModule.RegisterRoutes(api)
 	appointmentModule.RegisterRoutes(api)
+	referralModule.RegisterRoutes(api)
+	financeModule.RegisterRoutes(api)
+	staffModule.RegisterRoutes(api)
+	workflowModule.RegisterRoutes(api)
 
 	host := cfg.Server.Host
 	if host == "0.0.0.0" || host == "" {

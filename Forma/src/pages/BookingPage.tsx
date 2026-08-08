@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   Alert,
@@ -32,6 +32,8 @@ import type {
   PublicAppointment,
   SlotItem,
 } from '../types/booking'
+import { PhoneField } from '../ui/PhoneField'
+import { isValidUzPhone } from '../lib/phone'
 
 const theme = createTheme({
   palette: {
@@ -104,6 +106,8 @@ type Step = 'day' | 'slot' | 'form' | 'done'
 
 export function BookingPage() {
   const { slug = '' } = useParams<{ slug: string }>()
+  const [searchParams] = useSearchParams()
+  const referralId = searchParams.get('ref')?.trim() || ''
   const [service, setService] = useState<PublicAppointment | null>(null)
   const [days, setDays] = useState<DayAvailability[]>([])
   const [slots, setSlots] = useState<SlotItem[]>([])
@@ -168,7 +172,7 @@ export function BookingPage() {
   const openDays = days.filter((d) => d.open && d.freeSlots > 0)
 
   const formValid = useMemo(() => {
-    return name.trim().length >= 2 && phone.trim().length >= 9
+    return name.trim().length >= 2 && isValidUzPhone(phone)
   }, [name, phone])
 
   const submit = async () => {
@@ -181,6 +185,7 @@ export function BookingPage() {
         name: name.trim(),
         phone: phone.trim(),
         purpose: purpose.trim(),
+        referralId: referralId || undefined,
       })
       setResult(res)
       setStep('done')
@@ -225,6 +230,11 @@ export function BookingPage() {
                   <Typography className="!mt-2 !text-sm !text-slate-600">
                     {service.description}
                   </Typography>
+                )}
+                {referralId && (
+                  <Alert severity="info" className="!mt-3 !text-left">
+                    Siz referal havola orqali yozilmoqdasiz
+                  </Alert>
                 )}
                 {error && (
                   <Alert severity="warning" className="!mt-3 !text-left">
@@ -403,12 +413,10 @@ export function BookingPage() {
                           onChange={(e) => setName(e.target.value)}
                           required
                         />
-                        <TextField
-                          fullWidth
+                        <PhoneField
                           label="Telefon raqam"
                           value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+998 90 123 45 67"
+                          onChange={setPhone}
                           required
                         />
                         <TextField

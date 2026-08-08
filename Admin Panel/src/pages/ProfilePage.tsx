@@ -12,6 +12,9 @@ import { updateProfile } from '../api/auth'
 import { ApiError } from '../api/client'
 import { useAuth } from '../auth/AuthContext'
 import { useSnack } from '../ui/SnackProvider'
+import { PhoneField } from '../ui/PhoneField'
+import { PasswordField } from '../ui/PasswordField'
+import { isValidUzPhone } from '../lib/phone'
 
 const headingFont = { fontFamily: "'Outfit', sans-serif" }
 
@@ -50,6 +53,10 @@ export function ProfilePage() {
 
   const saveProfile = async (e: FormEvent) => {
     e.preventDefault()
+    if (!isValidUzPhone(form.phone)) {
+      showSnack('Telefon +998 90 123 45 67 formatida to‘liq bo‘lishi kerak', 'warning')
+      return
+    }
     setSaving(true)
     try {
       const updated = await updateProfile({
@@ -108,12 +115,11 @@ export function ProfilePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <TextField
+            <PhoneField
               label="Telefon"
               value={form.phone}
-              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+              onChange={(phone) => setForm((f) => ({ ...f, phone }))}
               required
-              fullWidth
             />
           </motion.div>
           <motion.div
@@ -134,13 +140,12 @@ export function ProfilePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <TextField
+            <PasswordField
               label="Yangi parol (ixtiyoriy)"
-              type="password"
               value={form.password}
-              onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
-              fullWidth
+              onChange={(password) => setForm((f) => ({ ...f, password }))}
               helperText="Bo‘sh qoldirsangiz eski parol saqlanadi"
+              autoComplete="new-password"
             />
           </motion.div>
           <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>

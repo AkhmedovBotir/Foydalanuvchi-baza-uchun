@@ -456,6 +456,15 @@ func (s *Service) cardQRContent(ctx context.Context, companyID, cardID string) (
 		return base + "/surveys/" + link.Slug, nil
 	}
 
+	// Referal vizitkasi — qabul + ref query
+	ref, err := s.repo.ReferralByCard(ctx, companyID, cardID)
+	if err != nil {
+		return "", err
+	}
+	if ref != nil && ref.ServiceSlug != "" {
+		return base + "/book/" + ref.ServiceSlug + "?ref=" + ref.ReferralID, nil
+	}
+
 	// Aks holda qabul (appointment) URL
 	appt, err := s.repo.AppointmentByCard(ctx, companyID, cardID)
 	if err != nil {
@@ -501,6 +510,17 @@ func (s *Service) cardDTO(ctx context.Context, c *domain.CompanyCard) (*dto.Comp
 		out.SurveySlug = link.Slug
 		out.SurveyTitle = link.Title
 		out.ResponseURL = base + "/surveys/" + link.Slug
+	}
+	ref, err := s.repo.ReferralByCard(ctx, c.CompanyID, c.ID)
+	if err != nil {
+		return nil, err
+	}
+	if ref != nil && ref.ServiceSlug != "" {
+		rid := ref.ReferralID
+		out.ReferralID = &rid
+		out.ReferralName = ref.ReferralName
+		out.BookingURL = base + "/book/" + ref.ServiceSlug + "?ref=" + ref.ReferralID
+		return out, nil
 	}
 	appt, err := s.repo.AppointmentByCard(ctx, c.CompanyID, c.ID)
 	if err != nil {
